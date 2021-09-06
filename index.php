@@ -24,6 +24,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     <div id="homepage" class="card" style="margin-top: 80px">
         <div class="card-header">
             <h3>Bill Form Collection</h3>
+            <a class="btn btn-sm btn-secondary" href="bill_list.php">Bill List</a>
         </div>
         <div class="card-body">
             <form action="bill_post.php" id="billForm" method="post">
@@ -62,7 +63,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                         <label for="">Current Reading</label>
                     </div>
                     <div class="col-md-9">
-                        <input class="form-control" type="text" name="current_reading" required>
+                        <input class="form-control" type="number" name="current_reading" required>
                     </div>
                 </div>
 
@@ -80,7 +81,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                         <label for="">Previous Reading</label>
                     </div>
                     <div class="col-md-9">
-                        <input class="form-control" type="text" name="previous_reading" required>
+                        <input class="form-control" type="number" name="previous_reading" required>
                     </div>
                 </div>
 
@@ -89,7 +90,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                         <label for="">Bill Amount</label>
                     </div>
                     <div class="col-md-9">
-                        <input class="form-control" type="text" name="bill_amount">
+                        <input class="form-control" type="number" name="bill_amount">
                     </div>
                 </div>
 

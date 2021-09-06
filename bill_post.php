@@ -7,5 +7,11 @@
  $previous_reading = $_POST['previous_reading'];
  $bill_amount = $_POST['bill_amount'];
 
-  $sql = "INSERT INTO bill where('customer_id', '') VALUE ('$customer_id','$date_of_meter_reading','$current_reading','$demand_type','$previous_reading','$bill_amount')";
+  $sql = "INSERT INTO bill(customer_id, date_of_meter_reading,current_reading,demand_type,previous_reading,bill_amount) VALUE ('$customer_id','$date_of_meter_reading','$current_reading','$demand_type','$previous_reading','$bill_amount')";
+
+  $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+
+  echo "Thank you ";
 ?>
+
+<a href="index.php">Click here to go back</a>
