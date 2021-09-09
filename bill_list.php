@@ -1,6 +1,6 @@
 <?php
 require "connection.php";
-$sql = "select * from bill";
+$sql = "select * from bill_info";
 $result = mysqli_query($conn, $sql);
 
 $bills = array();
@@ -27,27 +27,43 @@ while ($row = mysqli_fetch_assoc($result)) {
             <a class="btn btn-sm btn-secondary" href="index.php">Bill Form</a>
         </div>
         <div class="card-body">
+            <div class="row">
+                <div class="col-4 offset-8">
+                    <input type="text" name="search" placeholder="Search by SCNO" class="form-control search">
+                </div>
+            </div>
+            <br>
             <table class="table table-responsive table-striped">
-                <thead>
-                   <td>S.N</td>
-                   <td>Customer Id</td>
-                   <td>Date of Meter Reading</td>
-                   <td>Current Reading</td>
-                   <td>Previous Reading</td>
-                   <td>Bill Amount</td>
-                </thead>
-                <tbody>
+                <tr>
+                   <th>SC-NO</th>
+                   <th>CUS-ID</th>
+                   <th>Customer Full Name</th>
+                   <th>Date of Meter Reading</th>
+                   <th>Previous Reading</th>
+                   <th>Current Reading</th>
+                   <th>Unit Consumed</th>
+                   <th>Demand Type</th>
+                   <th>Bill Amount</th>
+                   <th>FYt</th>
+                   <th>Months</th>
+                </tr>
+                <tbody class="table-body">
                 <?php
                 if (count($bills) > 0) {
                     for ($i = 0; $i < count($bills); $i++) {
                         ?>
                         <tr>
-                            <td><?php echo $bills[$i]['id'] ?></td>
-                            <td><?php echo $bills[$i]['customer_id'] ?></td>
-                            <td><?php echo $bills[$i]['date_of_meter_reading'] ?></td>
+                            <td><?php echo $bills[$i]['scno'] ?></td>
+                            <td><?php echo $bills[$i]['cuid'] ?></td>
+                            <td><?php echo $bills[$i]['fname'] ?></td>
+                            <td><?php echo $bills[$i]['mdate'] ?></td>
+                            <td><?php echo $bills[$i]['pre_reading'] ?></td>
                             <td><?php echo $bills[$i]['current_reading'] ?></td>
-                            <td><?php echo $bills[$i]['previous_reading'] ?></td>
+                            <td><?php echo $bills[$i]['unit_consumed'] ?></td>
+                            <td><?php echo $bills[$i]['demand_type'] ?></td>
                             <td><?php echo $bills[$i]['bill_amount'] ?></td>
+                            <td><?php echo $bills[$i]['fy'] ?></td>
+                            <td><?php echo $bills[$i]['months'] ?></td>
                         </tr>
                         <?php
                     }
@@ -71,6 +87,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         init: function () {
             this.cacheDom();
             this.initPlugins();
+            this.bind();
         },
 
         cacheDom: function () {
@@ -93,6 +110,26 @@ while ($row = mysqli_fetch_assoc($result)) {
                 }
             })
         },
+
+        bind:function () {
+            this.$homepage.on('keyup', '.search', this.searchData);
+        },
+
+        searchData: function () {
+            $.ajax({
+                url: "search.php",
+                type: "post",
+                data: {
+                    search : this.value
+                },
+                success: function (response) {
+                    $('.table-body').html("").append(response);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            });
+        }
 
     }
     homepage.init();

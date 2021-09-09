@@ -1,14 +1,3 @@
-<?php
-require "connection.php";
-$sql = "select * from customer";
-$result = mysqli_query($conn, $sql);
-
-$users = array();
-
-while ($row = mysqli_fetch_assoc($result)) {
-    $users[] = $row;
-}
-?>
 <html>
 <head>
     <title>Home Page</title>
@@ -28,24 +17,31 @@ while ($row = mysqli_fetch_assoc($result)) {
         </div>
         <div class="card-body">
             <form action="bill_post.php" id="billForm" method="post">
+
+                <div class="row mt-3">
+                    <div class="col-md-3">
+                        <label for="">SC-NO</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input class="form-control" type="text" name="scno" required>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-3">
+                        <label for="">Customer ID</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input class="form-control" type="text" name="cuid" required>
+                    </div>
+                </div>
+
                 <div class="row mt-3">
                     <div class="col-md-3">
                         <label for="">Customer Full Name</label>
                     </div>
-
                     <div class="col-md-9">
-                        <select name="customer_id" id="customer_id" class="form-control">
-                            <?php
-                            if (count($users) > 0) {
-                                for ($i = 0; $i < count($users); $i++) {
-                                    ?>
-                                    <option value="<?php echo $users[$i]['id'] ?>"><?php echo $users[$i]['full_name'] ?></option>
-                                    <?php
-                                }
-                            }
-                            ?>
-
-                        </select>
+                        <input class="form-control" type="text" name="fname" required>
                     </div>
                 </div>
 
@@ -54,25 +50,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                         <label for="">Date of meter Reading</label>
                     </div>
                     <div class="col-md-9">
-                        <input class="form-control" type="date" name="date_of_meter_reading" required>
-                    </div>
-                </div>
-
-                <div class="row mt-3">
-                    <div class="col-md-3">
-                        <label for="">Current Reading</label>
-                    </div>
-                    <div class="col-md-9">
-                        <input class="form-control" type="number" name="current_reading" required>
-                    </div>
-                </div>
-
-                <div class="row mt-3">
-                    <div class="col-md-3">
-                        <label for="">Demand Type</label>
-                    </div>
-                    <div class="col-md-9">
-                        <input class="form-control" type="text" name="demand_type" required>
+                        <input class="form-control" type="date" name="mdate" required>
                     </div>
                 </div>
 
@@ -81,7 +59,37 @@ while ($row = mysqli_fetch_assoc($result)) {
                         <label for="">Previous Reading</label>
                     </div>
                     <div class="col-md-9">
-                        <input class="form-control" type="number" name="previous_reading" required>
+                        <input class="form-control" type="number" name="pre_reading" required>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-3">
+                        <label for="">Current Reading</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input class="form-control" type="number" name="current_reading" required>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-3">
+                        <label for="">Unit Consumed</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input class="form-control" type="number" name="unit_consumed" required>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-3">
+                        <label for="">Demand Type</label>
+                    </div>
+                    <div class="col-md-9">
+                        <select name="demand_type" id="demand_type" class="form-control">
+                            <option value="5A">5A</option>
+                            <option value="10A">10A</option>
+                            <option value="15A">15A</option>
+                            <option value="20A">20A</option>
+                        </select>
                     </div>
                 </div>
 
@@ -91,6 +99,24 @@ while ($row = mysqli_fetch_assoc($result)) {
                     </div>
                     <div class="col-md-9">
                         <input class="form-control" type="number" name="bill_amount">
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-3">
+                        <label for="">FY</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input class="form-control" type="text" name="fy">
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-3">
+                        <label for="">Months</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input class="form-control" type="text" name="months">
                     </div>
                 </div>
 
