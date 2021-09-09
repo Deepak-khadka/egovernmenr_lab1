@@ -11,5 +11,4 @@ Run this command in terminal
 
 Check the url :- `http://localhost:8000`
 
-You can see the form which is now under construction 
-be patient
+Now you can search the customer by scno as i have used in ajax real time search in php
